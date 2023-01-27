@@ -1,0 +1,64 @@
+<div class="container  mt-5">
+    <div class="card bg-">
+        <div class="d-flex justify-content-between p-3">
+            <div class="image">
+                <img src="https://img.freepik.com/free-vector/letter-q-vector_53876-60361.jpg?t=st=1658684280~exp=1658684880~hmac=adf614fe4eb29c3f9b8295c9caf641c0389816a26e1334e6b17e57445854a8f3&w=740" width="90" alt="logo">
+            </div>
+            <div class="quiz-header">
+                <h4 style="font-family: cursive ;">Quiz App</h4>
+                <span style="font-style: italic ;">Welcome {{name}}</span>
+            </div>
+        </div>
+        <ng-container *ngIf= "!isQuizCompleted">
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+                    <!-- <h5>{{points}} Points</h5> -->
+                </div>
+                <div class="question-remain">
+                    <h5 style="font-style: italic;">question {{currentQuestion +1}} of {{questionList.length}}</h5>
+                </div>
+                <div class="timer">
+                   <!-- <h5> {{counter}} sec ⌚</h5> -->
+                </div>
+            </div>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-label="Warning striped example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="question">
+                <div class="card">
+                    <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+                </div>
+              </div>
+              <div class="options">
+                <ol *ngFor= "let option of questionList[currentQuestion]?.options">
+                    <li (click)= "answer(currentQuestion+1, option)">
+                        <div class="card">
+                            {{option.text}}
+                        </div>
+                    </li>
+                    </ol>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button [disabled]= "currentQuestion===0" class="btn" (click)= "previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x"></i></button>
+                <!-- <button class="btn"><i class="fa-solid fa-arrows-rotate"></i></button> -->
+                <button [disabled]= "currentQuestion===8" class="btn" (click)= "nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x"></i></button>
+              
+              </div>
+        </ng-container>
+
+        <ng-container *ngIf= "isQuizCompleted">
+            <div class="row d-flex justify-content-between">
+                <img style="width: 50%;" class="img-fluid col-sm-12 mx-auto" src="https://previews.123rf.com/images/annahirna/annahirna1804/annahirna180400024/98847949-great-job-lettering-inspirational-and-motivational-quotes-can-be-used-for-prints-bags-t-shirts-home-.jpg" alt="">
+                <div class="result text-center col-md-6 col-sm-12">
+                    <h3>congratulations!! <br>you have completed the quiz</h3>
+                    <hr>
+                    <h5>Below is your result:</h5>
+                    <p>Total Questions Attempted :{{questionList.length}}</p>
+                    <p>Total Correct Answerd :{{correctAnswer}}</p>
+                    <p>Total Wrong Answerd :{{incorrectAnswer}}</p>
+                    <p>Your Score :{{points}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
